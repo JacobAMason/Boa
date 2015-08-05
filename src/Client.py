@@ -8,6 +8,11 @@ import StringIO
 
 
 class Bot(irc.IRCClient):
+    def __setattr__(self, name, value):
+        bannedOverwrites = ["privmsg"]
+        if name not in bannedOverwrites:
+            self.__dict__[name] = value
+
     def _get_nickname(self):
         return self.factory.nickname
 
