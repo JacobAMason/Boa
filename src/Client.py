@@ -5,7 +5,6 @@ import sys
 from twisted.words.protocols import irc
 from twisted.internet import protocol, reactor
 import StringIO
-import traceback
 
 
 class Bot(irc.IRCClient):
@@ -36,12 +35,11 @@ class Bot(irc.IRCClient):
         sys.stdout = codeOut
         sys.stderr = codeErr
 
-        # https://stackoverflow.com/questions/3702675/how-to-print-the-full-traceback-without-halting-the-program
         errorText = ""
         try:
             exec message
         except Exception, err:
-            errorText = traceback.format_exc()
+            errorText = str(err)
 
         # restore stdout and stderr
         sys.stdout = sys.__stdout__
