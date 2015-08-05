@@ -22,7 +22,7 @@ class Bot(irc.IRCClient):
         print "Joined %s." % (channel)
 
     def privmsg(self, user, channel, message):
-        if not message.startswith("Boa"):
+        if not message.startswith(self.nickname):
             return
         else:
             idx = message.find(' ')
