@@ -82,5 +82,7 @@ class BotFactory(protocol.ClientFactory):
 
 if __name__ == "__main__":
     channel = sys.argv[1]
-    reactor.connectTCP("coop.test.adtran.com", 6667, BotFactory('#' + channel))
+    nickname = sys.argv[2]
+    reactor.connectTCP("coop.test.adtran.com", 6667,
+                       BotFactory('#' + channel, nickname))
     reactor.run()
