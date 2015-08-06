@@ -18,6 +18,19 @@ class Bot(irc.IRCClient):
 
     nickname = property(_get_nickname)
 
+    def rainbow(self, message):
+        colorChar = ""
+        colorIndex = 2
+        coloredMessage = ""
+
+        for char in message:
+            coloredMessage += colorChar + str(colorIndex) + char
+            colorIndex += 1
+            if colorIndex == 13:
+                colorIndex = 2
+
+        return coloredMessage
+
     def signedOn(self):
         self.join(self.factory.channel)
         print "Signed on as %s." % (self.nickname)
